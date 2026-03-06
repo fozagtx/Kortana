@@ -24,7 +24,7 @@ export default function Footer() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
         <div style={{ display: 'flex', gap: 12 }}>
           {[
-            { icon: Github, href: 'https://github.com/fozagtx/Kortana', label: 'GitHub' },
+            { icon: Github, href: 'https://github.com/fozagtx/kortana', label: 'GitHub' },
           ].map(({ icon: Icon, href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" title={label}
               style={{ width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.08)', color: '#6B7280', textDecoration: 'none', transition: 'all 0.2s' }}
