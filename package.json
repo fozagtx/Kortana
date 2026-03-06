@@ -1,0 +1,33 @@
+{
+  "name": "kortana",
+  "version": "1.0.0",
+  "description": "Kortana — AI marketing agents for founders. Write blogs, tweet threads, pitches, and campaigns powered by LLMs and CTC micropayments on Creditcoin EVM.",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "agent",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "cd backend && bun run dev",
+    "dev:frontend": "cd frontend && bun run dev",
+    "dev:agent": "cd agent && bun start",
+    "dev": "concurrently \"bun run dev:backend\" \"bun run dev:frontend\"",
+    "test:client": "cd agent && bun run test:client",
+    "install:all": "cd backend && bun install && cd ../agent && bun install && cd ../frontend && bun install"
+  },
+  "keywords": [
+    "kortana",
+    "ai-marketing",
+    "creditcoin",
+    "evm",
+    "ai-agents",
+    "blockchain",
+    "micropayments",
+    "web3"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

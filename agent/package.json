@@ -1,0 +1,27 @@
+{
+  "name": "kortana-agent",
+  "version": "1.0.0",
+  "description": "Kortana CLI agent — discovers and pays for marketing agent services using CTC on Creditcoin EVM",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/agent.ts",
+    "dev": "tsx watch src/agent.ts",
+    "test:client": "tsx src/test-client.ts",
+    "generate-wallet": "tsx src/generate-wallet.ts",
+    "build": "tsc",
+    "start:prod": "node dist/agent.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "ethers": "^6.13.0",
+    "groq-sdk": "^0.37.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
