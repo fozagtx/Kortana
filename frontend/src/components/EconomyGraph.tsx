@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 
-const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana.onrender.com').replace(/\/$/, '');
+const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 
 interface PaymentNode {
   id: string;

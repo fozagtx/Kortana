@@ -8,7 +8,7 @@ import ToolCatalog from '@/components/ToolCatalog';
 import ProtocolTrace from '@/components/ProtocolTrace';
 import { useI18n } from '@/lib/LanguageContext';
 
-const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana.onrender.com').replace(/\/$/, '');
+const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
 
 export default function Home() {
   const { language, t } = useI18n();
@@ -46,7 +46,7 @@ export default function Home() {
           <h2 className="mono" style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)' }}>
             <span className="text-glow">{t.monitorTitle}</span> {t.monitorLabel}
           </h2>
-          <span className="badge badge-stx">{language === 'hi' ? '60FPS रियलटाइम' : '60FPS REALTIME'}</span>
+          <span className="badge badge-stx">60FPS REALTIME</span>
         </div>
         <div style={{ borderRadius: 0, padding: 4, background: '#111111', border: '1px solid rgba(110, 231, 183, 0.15)' }}>
           <EconomyGraph refreshTrigger={refreshTrigger} />

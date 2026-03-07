@@ -422,7 +422,7 @@ export default function AgentChat({ onNewPayments, onProtocolTrace }: Params) {
                         className="btn"
                         style={{ padding: '6px 10px', fontSize: '0.6rem' }}
                       >
-                        <Share2 size={12} /> {language === 'es' ? 'COMPARTIR' : (language === 'hi' ? 'शेयर' : 'SHARE')}
+                        <Share2 size={12} /> SHARE
                       </button>
                     </div>
 
@@ -431,7 +431,7 @@ export default function AgentChat({ onNewPayments, onProtocolTrace }: Params) {
                     <div style={{ marginTop: 12 }}>
                       <details>
                         <summary style={{ fontSize: '0.7rem', color: 'var(--text-muted)', cursor: 'pointer' }} className="mono">
-                          {language === 'es' ? 'Ver registros de ejecución' : (language === 'hi' ? 'निष्पादन लॉग देखें' : 'View Execution Logs')}
+                          View Execution Logs
                         </summary>
                         <SubAgentTree hires={msg.subAgentHires} />
                       </details>
