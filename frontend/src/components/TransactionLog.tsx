@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useI18n } from '@/lib/LanguageContext';
 
-const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 
 interface Payment {
   id: string;

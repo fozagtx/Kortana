@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 
 interface Tool {
   id: string;

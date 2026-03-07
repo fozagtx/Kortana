@@ -8,7 +8,7 @@ import ToolCatalog from '@/components/ToolCatalog';
 import ProtocolTrace from '@/components/ProtocolTrace';
 import { useI18n } from '@/lib/LanguageContext';
 
-const API = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 
 export default function Home() {
   const { language, t } = useI18n();
