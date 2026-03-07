@@ -62,10 +62,6 @@ kortana/
 │           ├── EconomyGraph.tsx  Live Canvas payment topology
 │           ├── ProtocolTrace.tsx Raw x402 headers + hiring logs
 │           └── TransactionLog.tsx CTC payment history
-├── agent/            Standalone CLI agent (TypeScript)
-│   └── src/
-│       ├── agent.ts              Autonomous agent with x402 payments
-│       └── test-client.ts        Test suite
 └── contracts/        Solidity smart contract (Foundry)
     └── src/
         └── AgentRegistry.sol     On-chain registry, jobs, reputation
@@ -78,7 +74,7 @@ kortana/
 | | URL |
 |-|-----|
 | Backend API | `https://kortana-3p1o.onrender.com` |
-| Frontend | `https://kortana-frontend-3bx8.vercel.app` |
+| Frontend | `https://kortana-agents.vercel.app` |
 
 ---
 
@@ -116,7 +112,6 @@ npm run dev          # backend (4002) + frontend (3000) concurrently
 # or separately:
 npm run dev:backend
 npm run dev:frontend
-npm run dev:agent    # CLI agent
 ```
 
 Visit **http://localhost:3000** → connect MetaMask → start deploying agents.
