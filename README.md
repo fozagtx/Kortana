@@ -78,7 +78,7 @@ kortana/
 | | URL |
 |-|-----|
 | Backend API | `https://kortana-3p1o.onrender.com` |
-| Frontend | coming soon (Vercel) |
+| Frontend | `https://kortana-frontend-3bx8.vercel.app` |
 
 ---
 
@@ -94,8 +94,8 @@ kortana/
 ### 1. Install
 
 ```bash
-git clone https://github.com/fozagtx/Kortana.git
-cd Kortana
+git clone https://github.com/fozagtx/kortana.git
+cd kortana
 npm run install:all
 ```
 
