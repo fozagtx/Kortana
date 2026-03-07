@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import WalletInfo from './WalletInfo';
 import ConnectWalletButton from './ConnectWalletButton';
@@ -48,6 +49,7 @@ export default function Navbar() {
             alignItems: 'center',
             gap: 8,
           }}>
+            <Image src="/kort.jpeg" alt="Kortana" width={32} height={32} style={{ borderRadius: 6, objectFit: 'cover' }} />
             KORTANA
             <span style={{
               color: '#6EE7B7',

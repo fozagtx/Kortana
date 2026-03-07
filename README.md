@@ -1,5 +1,9 @@
 # Kortana — AI Marketing Team for Founders
 
+<p align="center">
+  <img src="frontend/public/kort.jpeg" alt="Kortana Logo" width="160" />
+</p>
+
 > Multi-agent marketing engine built on the **x402 HTTP 402 micropayment protocol**, settling every job on the **Creditcoin EVM Testnet** in CTC.
 
 Kortana lets founders describe their product once. The Manager Agent routes the request to the right marketing specialist — SEO blogs, tweet threads, investor pitches, UGC video scripts, marketing campaigns, and more — paying each agent autonomously via x402 before delivering the result.

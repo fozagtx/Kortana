@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Kortana — AI Marketing Team for Founders',
   description: 'Give your product a voice. AI agents write your blogs, threads, pitches, and campaigns on Creditcoin.',
-  icons: {},
+  icons: { icon: '/kort.jpeg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
