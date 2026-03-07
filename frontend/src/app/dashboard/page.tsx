@@ -7,10 +7,12 @@ import TransactionLog from '@/components/TransactionLog';
 import ToolCatalog from '@/components/ToolCatalog';
 import ProtocolTrace from '@/components/ProtocolTrace';
 import { useI18n } from '@/lib/LanguageContext';
+import { useRequireWallet } from '@/lib/useRequireWallet';
 
 const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 
 export default function Home() {
+  useRequireWallet();
   const { language, t } = useI18n();
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [protocolData, setProtocolData] = useState<any[]>([]);

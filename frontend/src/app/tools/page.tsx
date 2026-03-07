@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRequireWallet } from '@/lib/useRequireWallet';
 
 const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 
@@ -17,6 +18,7 @@ interface Tool {
 }
 
 export default function ToolsPage() {
+  useRequireWallet();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState(true);

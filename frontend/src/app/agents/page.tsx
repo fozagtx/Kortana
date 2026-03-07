@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Bot, Zap, Star, Activity, BarChart3, Filter } from 'lucide-react';
 import { useI18n } from '@/lib/LanguageContext';
+import { useRequireWallet } from '@/lib/useRequireWallet';
 
 const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
 const MAX_RETRIES = 5;
 const RETRY_DELAY = 8000;
 
 export default function AgentsPage() {
+  useRequireWallet();
   const { t } = useI18n();
   const [agents, setAgents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
