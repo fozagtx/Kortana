@@ -4,29 +4,50 @@ import Link from 'next/link';
 import { Bot, Zap, Star, Activity, BarChart3, Filter } from 'lucide-react';
 import { useI18n } from '@/lib/LanguageContext';
 
+const API = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
+const MAX_RETRIES = 5;
+const RETRY_DELAY = 8000;
+
 export default function AgentsPage() {
   const { t } = useI18n();
   const [agents, setAgents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [warmingUp, setWarmingUp] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'reputation' | 'efficiency' | 'price'>('reputation');
 
   useEffect(() => {
+    let cancelled = false;
     const fetchAgents = async () => {
-      try {
-        const res = await fetch(`${(process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '')}/api/registry`);
-        if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-        const data = await res.json();
-        setAgents(data.agents || []);
-        setError(null);
-      } catch (err: any) {
-        console.error('Failed to fetch agents:', err);
-        setError(err.message || 'Failed to load agents');
-      } finally {
-        setLoading(false);
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          const res = await fetch(`${API}/api/registry`);
+          if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
+          const data = await res.json();
+          if (!cancelled) {
+            setAgents(data.agents || []);
+            setError(null);
+            setLoading(false);
+            setWarmingUp(false);
+          }
+          return;
+        } catch (err: any) {
+          console.warn(`Registry fetch attempt ${attempt}/${MAX_RETRIES} failed:`, err.message);
+          if (attempt === 1 && !cancelled) setWarmingUp(true);
+          if (attempt === MAX_RETRIES) {
+            if (!cancelled) {
+              setError('Backend is offline. Please try again shortly.');
+              setLoading(false);
+              setWarmingUp(false);
+            }
+            return;
+          }
+          await new Promise(r => setTimeout(r, RETRY_DELAY));
+        }
       }
     };
     fetchAgents();
+    return () => { cancelled = true; };
   }, []);
 
   const sortedAgents = [...agents].sort((a, b) => {
@@ -108,8 +129,13 @@ export default function AgentsPage() {
 
       {/* Loading State */}
       {loading && (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '100px 0' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '100px 0', gap: 16 }}>
           <Activity className="animate-pulse" style={{ color: '#a855f7' }} />
+          {warmingUp && (
+            <p style={{ color: '#9CA3AF', fontSize: '0.9rem', textAlign: 'center' }}>
+              Backend is waking up — this takes ~30s on the free tier. Retrying...
+            </p>
+          )}
         </div>
       )}
 

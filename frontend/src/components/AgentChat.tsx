@@ -268,38 +268,47 @@ export default function AgentChat({ onNewPayments, onProtocolTrace }: Params) {
     setIsProcessing(true);
     setAgentStatus('planning');
 
-    try {
-      const response = await fetch(`${(process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '')}/api/agent/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: userMsg, clientId: clientId.current })
-      });
+    const API_BASE = (process.env.NEXT_PUBLIC_API_URL || 'https://kortana-3p1o.onrender.com').replace(/\/$/, '');
+    const MAX_RETRIES = 4;
+    let lastError: any;
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        if (attempt === 2) {
+          setMessages(prev => [...prev, { role: 'system', content: '**Backend waking up...** Free tier cold start, retrying in a moment.' }]);
+        }
+
+        const response = await fetch(`${API_BASE}/api/agent/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: userMsg, clientId: clientId.current })
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const result = await response.json();
+
+        if (result.finalAnswer) {
+          setMessages(prev => [...prev, { role: 'assistant', content: result.finalAnswer, depth: 0 }]);
+        }
+
+        setIsProcessing(false);
+        setAgentStatus('idle');
+        return;
+
+      } catch (error) {
+        lastError = error;
+        console.warn(`Agent query attempt ${attempt}/${MAX_RETRIES} failed:`, error);
+        if (attempt < MAX_RETRIES) {
+          await new Promise(r => setTimeout(r, 8000));
+        }
       }
-
-      const result = await response.json();
-
-      // The final result is also sent via SSE 'done', but we can update UI here from the direct response too
-      if (result.finalAnswer) {
-         setMessages(prev => [...prev, {
-            role: 'assistant',
-            content: result.finalAnswer,
-            depth: 0
-         }]);
-      }
-
-      // Explicit UI reset after successful API fetch to prevent stuck "Thinking" state
-      setIsProcessing(false);
-      setAgentStatus('idle');
-
-    } catch (error) {
-      console.error('API Error:', error);
-      setMessages(prev => [...prev, { role: 'system', content: `**Error:** Failed to connect to agent service.` }]);
-      setIsProcessing(false);
-      setAgentStatus('idle');
     }
+
+    console.error('API Error after retries:', lastError);
+    setMessages(prev => [...prev, { role: 'system', content: `**Error:** Could not reach agent service after ${MAX_RETRIES} attempts. Backend may be offline.` }]);
+    setIsProcessing(false);
+    setAgentStatus('idle');
   };
 
 
