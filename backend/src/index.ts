@@ -47,12 +47,12 @@ import { EXTERNAL_AGENTS, callExternalAgent } from './universal-adapter.js';
 dotenv.config();
 
 const PORT = parseInt(process.env.PORT || '4002', 10);
-const HOST = process.env.HOST || '0.0.0.0';
-const NETWORK = process.env.NETWORK || 'creditcoin-testnet';
-const CHAIN_ID = process.env.CHAIN_ID || '102031';
-const RPC_URL = process.env.RPC_URL || 'https://rpc.cc3-testnet.creditcoin.network';
-const SERVER_ADDRESS = process.env.SERVER_ADDRESS || '0x0000000000000000000000000000000000000000';
+const HOST = '0.0.0.0';
+const NETWORK = 'creditcoin-testnet';
+const CHAIN_ID = '102031';
+const RPC_URL = 'https://rpc.cc3-testnet.creditcoin.network';
 const EXPLORER_BASE = 'https://creditcoin-testnet.blockscout.com';
+const SERVER_ADDRESS = process.env.SERVER_ADDRESS || '';
 const AGENT_PRIVATE_KEY = process.env.AGENT_PRIVATE_KEY || '';
 
 // ═══════════════════════════════════════════════════════════════════════════

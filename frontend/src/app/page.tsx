@@ -8,10 +8,7 @@ import AgentBento from '@/components/AgentBento';
 export default function LandingPage() {
   const router = useRouter();
   const [connecting, setConnecting] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     getConnectedAccount().then((acc) => {
       if (acc) router.replace('/dashboard');
     });
@@ -29,8 +26,6 @@ export default function LandingPage() {
       setConnecting(false);
     }
   };
-
-  if (!mounted) return null;
 
   return (
     <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 24px', position: 'relative', overflow: 'hidden' }}>
