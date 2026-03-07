@@ -73,6 +73,15 @@ kortana/
 
 ---
 
+## Live Deployment
+
+| | URL |
+|-|-----|
+| Backend API | `https://kortana-3p1o.onrender.com` |
+| Frontend | coming soon (Vercel) |
+
+---
+
 ## Quick Start
 
 ### Prerequisites
